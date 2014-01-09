@@ -3,45 +3,43 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
 
-	private Vector2 MovementVector = Vector2.zero;
+	private Vector2 velocityHolder;
+	private float movementValue;
 	public float drag = 0.87f;
 	public float accel = 2f;
 	public float MaximumSpeed = 6f;
-	private Vector2 inputVector;
+	private float inputValue;
 
 	public Rigidbody2D pivotRotater;
-	public float rotateSpeedScale = 0.0000000000000000001f;
-
+	public float rotateSpeedScale = 0.01f;
 	void Update () 
 	{
 		#region Get Input
-		inputVector = Vector2.zero;
+		inputValue = 0;
 		if(Input.GetKey(KeyCode.S))
 		{
-			inputVector.y -= 1;
+			inputValue -= accel;
 		}
 		if(Input.GetKey(KeyCode.W))
 		{
-			inputVector.y += 1;
+			inputValue += accel;
 		}
 		#endregion
 
 		#region Apply Movement
-		MovementVector += (inputVector * accel);
-		MovementVector *= drag;
+		movementValue += inputValue;
+		movementValue *= drag;
 
-		if(MovementVector.magnitude > MaximumSpeed)
+		if(Mathf.Abs(movementValue) > MaximumSpeed)
 		{
-			MovementVector = MovementVector.normalized * MaximumSpeed;
+			movementValue = Mathf.Sign(movementValue) * MaximumSpeed;
 		}
-
-		MovementVector.x = rigidbody2D.velocity.x;
-		rigidbody2D.velocity = MovementVector;
+		rigidbody2D.velocity = (transform.position - pivotRotater.transform.position).normalized * movementValue;
 		#endregion
 
 		#region Rotate around centerpoint
 		Vector3 hey = pivotRotater.transform.eulerAngles;
-		hey.z += (transform.position - pivotRotater.transform.position).magnitude * rotateSpeedScale;
+		hey.z -= 10/(transform.position - pivotRotater.transform.position).magnitude * rotateSpeedScale * Time.deltaTime;
 		pivotRotater.transform.eulerAngles = hey;
 
 
