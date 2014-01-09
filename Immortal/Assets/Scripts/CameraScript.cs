@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraScript : MonoBehaviour {
+public class CameraScript : MonoBehaviour 
+{
 
 	public GameObject Protagonist;
 
