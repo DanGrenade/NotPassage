@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour {
 
 		#region Rotate around centerpoint
 		Vector3 hey = PivotRotater.transform.eulerAngles;
-		hey.z -= (10/(transform.position - PivotRotater.transform.position).magnitude * RotateSpeedScale * Time.deltaTime) * xSpeed;
+		hey.z -= (10/(transform.position - PivotRotater.transform.position).magnitude * RotateSpeedScale) * xSpeed  * Time.deltaTime;
 		PivotRotater.transform.eulerAngles = hey;
 
 
