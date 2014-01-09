@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour {
 	public float Accel = 2f;
 	public float MaximumSpeed = 6f;
 	private float inputValue;
+	public float xSpeed;
 
 	public Rigidbody2D PivotRotater;
 	public float RotateSpeedScale = 0.01f;
@@ -39,7 +40,7 @@ public class PlayerMovement : MonoBehaviour {
 
 		#region Rotate around centerpoint
 		Vector3 hey = PivotRotater.transform.eulerAngles;
-		hey.z -= 10/(transform.position - PivotRotater.transform.position).magnitude * RotateSpeedScale * Time.deltaTime;
+		hey.z -= (10/(transform.position - PivotRotater.transform.position).magnitude * RotateSpeedScale * Time.deltaTime) * xSpeed;
 		PivotRotater.transform.eulerAngles = hey;
 
 
