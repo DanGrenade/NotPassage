@@ -9,10 +9,9 @@ public class PlayerMovement : MonoBehaviour {
 	public float Accel = 2f;
 	public float MaximumSpeed = 6f;
 	private float inputValue;
-	public float xSpeed;
-
 	public Rigidbody2D PivotRotater;
-	public float RotateSpeedScale = 0.01f;
+
+
 	void Update () 
 	{
 		#region Get Input
@@ -36,14 +35,6 @@ public class PlayerMovement : MonoBehaviour {
 			movementValue = Mathf.Sign(movementValue) * MaximumSpeed;
 		}
 		rigidbody2D.velocity = (transform.position - PivotRotater.transform.position).normalized * movementValue;
-		#endregion
-
-		#region Rotate around centerpoint
-		Vector3 hey = PivotRotater.transform.eulerAngles;
-		hey.z -= (10/(transform.position - PivotRotater.transform.position).magnitude * RotateSpeedScale * Time.deltaTime) * xSpeed;
-		PivotRotater.transform.eulerAngles = hey;
-
-
 		#endregion
 	}
 }
