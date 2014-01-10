@@ -15,7 +15,9 @@ public abstract class AI : MonoBehaviour
 		transform.localPosition = start;
 		Vector3 rotate = transform.eulerAngles;
 		rotate.z = Vector2.Angle (Vector2.up, PivotRotater.transform.position - transform.position);
-		if (PivotRotater.transform.position.z > transform.position.z)	rotate.z = 360 - rotate.z;
+		if (PivotRotater.transform.position.x < transform.position.x) rotate.z -= 180;
+		else rotate.z = 180 - rotate.z;
+
 		transform.eulerAngles = rotate;
 	}
 }
