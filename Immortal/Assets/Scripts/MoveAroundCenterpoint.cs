@@ -8,7 +8,7 @@ public class MoveAroundCenterpoint : MonoBehaviour
 	private float xSpeed = 10.0f;
 	private Vector3 rotatingPoint;
 
-	private float maximumDistance = 10f;
+	private float maximumDistance = 22f;
 
 	// Update is called once per frame
 	void Update () 

@@ -14,8 +14,8 @@ public abstract class AI : MonoBehaviour
 
 	private Vector3 rotate;
 
-	private float AIReactSpeed = 10f;
-	private float MaximumSpeed = 30f;
+	private float AIReactSpeed = 25f;
+	private float MaximumSpeed = 50f;
 
 	public void Start()
 	{
