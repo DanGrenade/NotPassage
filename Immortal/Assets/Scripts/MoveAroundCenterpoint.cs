@@ -8,9 +8,16 @@ public class MoveAroundCenterpoint : MonoBehaviour
 	private float xSpeed = 10.0f;
 	private Vector3 rotatingPoint;
 
+	private float maximumDistance = 10f;
+
 	// Update is called once per frame
 	void Update () 
 	{
+		if((transform.position - PivotRotater.transform.position).magnitude > maximumDistance)
+		{
+			transform.position = ((transform.position - PivotRotater.transform.position).normalized * maximumDistance) + PivotRotater.transform.position;
+		}
+
 		rotatingPoint = PivotRotater.transform.eulerAngles;
 		rotatingPoint.z -= (10/(transform.position - PivotRotater.transform.position).magnitude * RotateSpeedScale) * xSpeed  * Time.deltaTime;
 		PivotRotater.transform.eulerAngles = rotatingPoint;
