@@ -10,20 +10,34 @@ public abstract class AI : MonoBehaviour
 	protected AIState currentAIState;
 
 	public GameObject PivotRotater;
-	public GameObject Protagonist;
+
+	[System.NonSerialized]
+	private GameObject Protagonist;
+
 
 	private Vector3 rotate;
 
 	private float AIReactSpeed = 25f;
 	private float MaximumSpeed = 50f;
 
-	public void Start()
+	private float RunSpeed = 10f;
+	private float RunMaxSpeed = 30f;
+
+	private float TowardsSpeed = 10f;
+	private float TowardsMaxSpeed = 30f;
+
+	private float FollowSpeed = 10f;
+	private float FollowMaxSpeed = 30f;
+
+	public void Awake()
 	{
 		rotate = transform.eulerAngles;
 		rotate.z = Vector2.Angle (Vector2.up, PivotRotater.transform.position - transform.position);
 		if (PivotRotater.transform.position.x < transform.position.x) rotate.z -= 180;
 		else rotate.z = 180 - rotate.z;
 		transform.eulerAngles = rotate;
+
+		Protagonist = GameObject.FindGameObjectWithTag ("Player");
 
 		ChildStart ();
 	}
@@ -40,18 +54,18 @@ public abstract class AI : MonoBehaviour
 		case AIState.Run:
 			if((Protagonist.transform.position - transform.position).sqrMagnitude < 2)
 			{
-				rigidbody2D.velocity = Vector2.ClampMagnitude(((rigidbody2D.velocity + ((Vector2)transform.position - (Vector2)Protagonist.transform.position)).normalized * Time.deltaTime * AIReactSpeed), MaximumSpeed);
+				rigidbody2D.velocity = Vector2.ClampMagnitude(((rigidbody2D.velocity + ((Vector2)transform.position - (Vector2)Protagonist.transform.position)).normalized * Time.deltaTime * RunSpeed), RunMaxSpeed);
 			}
 			break;
 		case AIState.MoveTowards: 
 			if((Protagonist.transform.position - transform.position).sqrMagnitude < 2)
 			{
-				rigidbody2D.velocity = Vector2.ClampMagnitude(((rigidbody2D.velocity + (Vector2)Protagonist.transform.position - (Vector2)transform.position).normalized * Time.deltaTime * AIReactSpeed), MaximumSpeed);
+				rigidbody2D.velocity = Vector2.ClampMagnitude(((rigidbody2D.velocity + (Vector2)Protagonist.transform.position - (Vector2)transform.position).normalized * Time.deltaTime * TowardsSpeed), TowardsMaxSpeed);
 
 			}
 			break;
 		case AIState.Following:
-			rigidbody2D.velocity = Vector2.ClampMagnitude(((rigidbody2D.velocity + (Vector2)Protagonist.transform.position - (Vector2)transform.position).normalized * Time.deltaTime * AIReactSpeed), MaximumSpeed);
+			rigidbody2D.velocity = Vector2.ClampMagnitude(((rigidbody2D.velocity + (Vector2)Protagonist.transform.position - (Vector2)transform.position).normalized * Time.deltaTime * FollowSpeed), FollowMaxSpeed);
 
 			break;
 		}
