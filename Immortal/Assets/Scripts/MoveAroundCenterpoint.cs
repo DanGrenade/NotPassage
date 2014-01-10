@@ -4,8 +4,8 @@ using System.Collections;
 public class MoveAroundCenterpoint : MonoBehaviour 
 {
 	public Rigidbody2D PivotRotater;                                                                                                                                                                           
-	private float RotateSpeedScale = 0.01f;
-	private float xSpeed = 1.0f;
+	private float RotateSpeedScale = 0.2f;
+	private float xSpeed = 10.0f;
 	private Vector3 rotatingPoint;
 
 	// Update is called once per frame
