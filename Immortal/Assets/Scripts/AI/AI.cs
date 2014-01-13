@@ -9,7 +9,7 @@ public abstract class AI : MonoBehaviour
 	};
 	protected AIState currentAIState;
 
-	public GameObject PivotRotater;
+	public Vector2 PivotRotater;
 
 	[System.NonSerialized]
 	private GameObject Protagonist;
@@ -26,14 +26,14 @@ public abstract class AI : MonoBehaviour
 	private float TowardsSpeed = 10f;
 	private float TowardsMaxSpeed = 30f;
 
-	private float FollowSpeed = 10f;
+	private float FollowSpeed = 20f;
 	private float FollowMaxSpeed = 30f;
 
 	public void Awake()
 	{
 		rotate = transform.eulerAngles;
-		rotate.z = Vector2.Angle (Vector2.up, PivotRotater.transform.position - transform.position);
-		if (PivotRotater.transform.position.x < transform.position.x) rotate.z -= 180;
+		rotate.z = Vector2.Angle (Vector2.up, PivotRotater - (Vector2)transform.position);
+		if (PivotRotater.x < transform.position.x) rotate.z -= 180;
 		else rotate.z = 180 - rotate.z;
 		transform.eulerAngles = rotate;
 
@@ -71,11 +71,11 @@ public abstract class AI : MonoBehaviour
 		}
 
 
-         ChildUpdate();
+        ChildUpdate();
 
 		rotate = transform.eulerAngles;
-		rotate.z = Vector2.Angle (Vector2.up, PivotRotater.transform.position - transform.position);
-		if (PivotRotater.transform.position.x < transform.position.x) rotate.z -= 180;
+		rotate.z = Vector2.Angle (Vector2.up, PivotRotater - (Vector2)transform.position);
+		if (PivotRotater.x < transform.position.x) rotate.z -= 180;
 		else rotate.z = 180 - rotate.z;
 		transform.eulerAngles = rotate;
 	}

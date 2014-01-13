@@ -21,7 +21,7 @@ public class AISpawner : MonoBehaviour
 		if (nextAISpawnTime < Time.time) 
 		{
 			GameObject.Instantiate (AIPrefabs[Random.Range(0, AIPrefabs.Length)], 
-			                        new Vector2(Radius * Mathf.Cos (Random.Range(0, 360) * Mathf.Deg2Rad), Radius * Mathf.Sin (Random.Range(0, 360) * Mathf.Deg2Rad)),
+			                        ((new Vector2(Radius * Mathf.Cos (Random.Range(0, 360) * Mathf.Deg2Rad), Radius * Mathf.Sin (Random.Range(0, 360) * Mathf.Deg2Rad))) + (Vector2)transform.position),
 			                        Quaternion.identity);
 
 			switch(currentState)
