@@ -15,14 +15,18 @@ public class CameraScript : MonoBehaviour
 	public GameObject protagonist;
 	
 	public float zoomSpeed;
-	
-	
+
+	public GameObject RotationObject;
+	private Vector3 rotationVector;
+	public float rotationSpeed;
+
 	// Use this for initialization
 	void Start () 
 	{
 		Camera.main.orthographicSize = zoomInMenu;
 		Camera.main.transform.position = cameraPositionInMenu;
 		Time.timeScale = 0;
+		rotationVector = RotationObject.transform.eulerAngles;
 	}
 	
 	// Update is called once per frame
@@ -40,12 +44,18 @@ public class CameraScript : MonoBehaviour
 				{
 					Application.Quit();
 				}
+
+				rotationVector.z += rotationSpeed;
+				RotationObject.transform.eulerAngles = rotationVector;
 			}
 			
 			if(!InMenu)
 			{
 				Camera.main.transform.position = Vector2.Lerp(Camera.main.transform.position, protagonist.transform.position, zoomSpeed);
 				Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, zoomInGame, zoomSpeed);
+				rotationVector.z = Mathf.LerpAngle(rotationVector.z, 0, 0.3f);
+				RotationObject.transform.eulerAngles = rotationVector;
+
 				if(transform.position == protagonist.transform.position)
 				{
 					Camera.main.transform.parent = protagonist.transform;
