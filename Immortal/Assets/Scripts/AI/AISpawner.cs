@@ -9,15 +9,30 @@ public class AISpawner : MonoBehaviour
 	}
 	public AreaState currentState = AreaState.Four;
 
+	#region Spawning AI
 	public float Radius;
 	public GameObject[] AIPrefabs;
 	private GameObject temp;
 
 	private float nextAISpawnTime;
 	public float[] TimerStates;
-	
+	#endregion
+
+	#region 
+	public float MaxTime;
+	private float currentTime;
+	public float[] timeForStates;
+	public float rateOfDecay;
+	#endregion
+
+	public void Start()
+	{
+		currentTime = MaxTime;
+	}
+
 	public void Update()
 	{
+		#region Spawning AI
 		if (nextAISpawnTime < Time.time) 
 		{
 			GameObject.Instantiate (AIPrefabs[Random.Range(0, AIPrefabs.Length)], 
@@ -39,7 +54,51 @@ public class AISpawner : MonoBehaviour
 				nextAISpawnTime += TimerStates[3];
 				break;
 			}
-
 		}
+		#endregion
+
+		#region Decay
+		currentTime -= (rateOfDecay * Time.deltaTime);
+
+		switch(currentState)
+		{
+		case AreaState.One:
+			if(currentTime < timeForStates[0])
+			{
+				currentState = AreaState.Two;
+			}
+			break;
+		case AreaState.Two:
+			if(currentTime < timeForStates[1])
+			{
+				currentState = AreaState.Three;
+			}
+			else if(currentTime > timeForStates[0])
+			{
+				currentState = AreaState.One;
+			}
+			break;
+		case AreaState.Three:
+			if(currentTime < timeForStates[2])
+			{
+				currentState = AreaState.Four;
+			}
+			else if(currentTime > timeForStates[1])
+			{
+				currentState = AreaState.One;
+			}
+			break;
+		case AreaState.Four:
+			if(currentTime < 0)
+			{
+				//Destroy!
+			}
+			else if(currentTime > timeForStates[2])
+			{
+				currentState = AreaState.Three;
+			}
+			break;
+		}
+		#endregion
 	}
 }
