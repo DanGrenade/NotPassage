@@ -26,8 +26,8 @@ public abstract class AI : MonoBehaviour
 	private float TowardsSpeed = 10f;
 	private float TowardsMaxSpeed = 30f;
 
-	private float FollowSpeed = 20f;
-	private float FollowMaxSpeed = 30f;
+	private float FollowSpeed = 30f;
+	private float FollowMaxSpeed = 40f;
 
 	public void Awake()
 	{
