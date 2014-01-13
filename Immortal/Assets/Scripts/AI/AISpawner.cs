@@ -18,11 +18,16 @@ public class AISpawner : MonoBehaviour
 	public float[] TimerStates;
 	#endregion
 
-	#region 
+	#region Decay Times
 	public float MaxTime;
 	private float currentTime;
 	public float[] timeForStates;
 	public float rateOfDecay;
+	#endregion
+
+	#region Growth Stuff
+	public float rateOfGrowth;
+
 	#endregion
 
 	public void Start()
@@ -100,5 +105,17 @@ public class AISpawner : MonoBehaviour
 			break;
 		}
 		#endregion
+	}
+
+	public void OnTriggerStay2D(Collider2D other)
+	{
+		if(other.tag == "Player")
+		{
+			currentTime += rateOfGrowth;
+			if(currentTime > MaxTime)
+			{
+				currentTime = MaxTime;
+			}
+		}
 	}
 }
