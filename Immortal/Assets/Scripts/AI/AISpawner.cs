@@ -28,11 +28,14 @@ public class AISpawner : MonoBehaviour
 	#endregion
 
 	private bool dead = false;
+	private GameObject birds;
+	public Vector2 birdLocation;
 
 	public void Start()
 	{
 		currentTime = MaxTime;
 		render = gameObject.GetComponent<SpriteRenderer> ();
+		birds = (GameObject)Resources.Load ("Birds") as GameObject;
 	}
 
 	public void Update()
@@ -94,6 +97,8 @@ public class AISpawner : MonoBehaviour
 				if(currentTime < 0)
 				{
 					dead = true;
+					birds = (GameObject)GameObject.Instantiate(birds, birdLocation + (Vector2)transform.position, Quaternion.identity) as GameObject;
+					birds.transform.eulerAngles = transform.eulerAngles;
 				}
 				break;
 			}
