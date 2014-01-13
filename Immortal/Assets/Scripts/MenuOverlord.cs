@@ -1,22 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraScript : MonoBehaviour 
+public class MenuOverlord : MonoBehaviour 
 {
-
-	public GameObject Protagonist;
-
 	public bool InMenu = true;
 	public bool InGame = false;
-	
+
 	public float zoomInMenu;
 	public Vector2 cameraPositionInMenu;
 	public float zoomInGame;
 	public GameObject protagonist;
-	
+
 	public float zoomSpeed;
-	
-	
+
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -41,22 +38,16 @@ public class CameraScript : MonoBehaviour
 					Application.Quit();
 				}
 			}
-			
+
 			if(!InMenu)
 			{
-				Camera.main.transform.position = Vector2.Lerp(Camera.main.transform.position, protagonist.transform.position, zoomSpeed);
-				Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, zoomInGame, zoomSpeed);
+				Camera.main.transform.position = Vector2.Lerp(Camera.main.transform.position, protagonist.transform.position, Time.deltaTime * zoomSpeed);
 				if(transform.position == protagonist.transform.position)
 				{
 					Camera.main.transform.parent = protagonist.transform;
 					Time.timeScale = 1;
 				}
 			}
-		}
-		else
-		{
-			transform.position = Protagonist.transform.position;
-			transform.rotation = Protagonist.transform.rotation;
 		}
 	}
 }

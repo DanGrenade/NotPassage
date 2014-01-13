@@ -90,7 +90,7 @@ public abstract class AI : MonoBehaviour
 		if(currentTime < 0)
 		{
 			Protagonist.GetComponent<PlayerScore>().RemoveScore(1);
-			GameObject.Destroy (this);
+			GameObject.Destroy (gameObject);
 		}
 	}
 
