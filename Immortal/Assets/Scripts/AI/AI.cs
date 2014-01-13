@@ -14,7 +14,7 @@ public abstract class AI : MonoBehaviour
 	[System.NonSerialized]
 	private GameObject Protagonist;
 
-
+	#region Movement
 	private Vector3 rotate;
 
 	private float AIReactSpeed = 25f;
@@ -28,6 +28,13 @@ public abstract class AI : MonoBehaviour
 
 	private float FollowSpeed = 30f;
 	private float FollowMaxSpeed = 40f;
+	#endregion
+
+	#region Time
+	public float MaxTime;
+	private float currentTime;
+	public float AgeSpeed;
+	#endregion
 
 	public void Awake()
 	{
@@ -38,6 +45,8 @@ public abstract class AI : MonoBehaviour
 		transform.eulerAngles = rotate;
 
 		Protagonist = GameObject.FindGameObjectWithTag ("Player");
+
+		currentTime = MaxTime;
 
 		ChildStart ();
 	}
@@ -57,7 +66,7 @@ public abstract class AI : MonoBehaviour
 				rigidbody2D.velocity = Vector2.ClampMagnitude(((rigidbody2D.velocity + ((Vector2)transform.position - (Vector2)Protagonist.transform.position)).normalized * Time.deltaTime * RunSpeed), RunMaxSpeed);
 			}
 			break;
-		case AIState.MoveTowards: 
+		case AIState.MoveTowards:
 			if((Protagonist.transform.position - transform.position).sqrMagnitude < 2)
 			{
 				rigidbody2D.velocity = Vector2.ClampMagnitude(((rigidbody2D.velocity + (Vector2)Protagonist.transform.position - (Vector2)transform.position).normalized * Time.deltaTime * TowardsSpeed), TowardsMaxSpeed);
@@ -70,19 +79,19 @@ public abstract class AI : MonoBehaviour
 			break;
 		}
 
-
-        ChildUpdate();
-
 		rotate = transform.eulerAngles;
 		rotate.z = Vector2.Angle (Vector2.up, PivotRotater - (Vector2)transform.position);
 		if (PivotRotater.x < transform.position.x) rotate.z -= 180;
 		else rotate.z = 180 - rotate.z;
 		transform.eulerAngles = rotate;
-	}
 
-	public virtual void ChildUpdate()
-	{
+		currentTime -= (AgeSpeed * Time.deltaTime);
 
+		if(currentTime < 0)
+		{
+			Protagonist.GetComponent<PlayerScore>().RemoveScore(1);
+			GameObject.Destroy (this);
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
@@ -90,6 +99,7 @@ public abstract class AI : MonoBehaviour
 		if(other.tag == "Player")
 		{
 			currentAIState = AIState.Following;
+			Protagonist.GetComponent<PlayerScore>().AddScore(1);
 		}
 	}
 }
