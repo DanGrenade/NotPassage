@@ -20,10 +20,10 @@ public abstract class AI : MonoBehaviour
 	private float AIReactSpeed = 25f;
 	private float MaximumSpeed = 50f;
 
-	private float RunSpeed = 10f;
+	private float RunSpeed = 15f;
 	private float RunMaxSpeed = 30f;
 
-	private float TowardsSpeed = 10f;
+	private float TowardsSpeed = 20f;
 	private float TowardsMaxSpeed = 30f;
 
 	private float FollowSpeed = 30f;
