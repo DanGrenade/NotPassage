@@ -9,6 +9,8 @@ public class CameraScript : MonoBehaviour
 	public GameObject play;
 	public GameObject quit;
 
+	public GameObject endOfGameUI;
+
 	public bool InMenu = true;
 	public bool InGame = false;
 	
@@ -24,7 +26,7 @@ public class CameraScript : MonoBehaviour
 	private Vector3 rotationVector;
 	public float rotationSpeed;
 
-	public float timeToDisplayExit;
+	public float timeToDisplayExit = 1500f;
 
 	// Use this for initialization
 	void Start ()
@@ -33,6 +35,8 @@ public class CameraScript : MonoBehaviour
 		Camera.main.transform.position = cameraPositionInMenu;
 		Time.timeScale = 0;
 		rotationVector = RotationObject.transform.eulerAngles;
+
+		endOfGameUI.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -79,7 +83,7 @@ public class CameraScript : MonoBehaviour
 
 			if(timeToDisplayExit < Time.time)
 			{
-
+				endOfGameUI.SetActive(true);
 			}
 		}
 	}
