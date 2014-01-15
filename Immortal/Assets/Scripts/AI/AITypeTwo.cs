@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AITypetwo : AI
+public class AITypeTwo : AI
 {
 
 	public override void ChildStart()
