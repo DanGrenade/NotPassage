@@ -6,7 +6,6 @@ public class CameraScript : MonoBehaviour
 
 	public GameObject Protagonist;
 
-<<<<<<< HEAD
 	public bool InMenu = true;
 	public bool InGame = false;
 	
@@ -69,12 +68,6 @@ public class CameraScript : MonoBehaviour
 			transform.position = Protagonist.transform.position;
 			transform.rotation = Protagonist.transform.rotation;
 		}
-=======
-	// Update is called once per frame
-	void Update () 
-	{
-		transform.position = Protagonist.transform.position;
-		transform.rotation = Protagonist.transform.rotation;
->>>>>>> 46e2209be76bd638eec218ed0c06ec442846fe2e
 	}
+
 }
