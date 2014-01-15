@@ -10,14 +10,17 @@ public class PlayerScore : MonoBehaviour
 	private float scoreDisplayedFloat = 0;
 
 	public Vector2 DisplayLocation;
-	private List<GameObject> numberDisplays;
+	public GameObject basePointObject;
+	public int distBetweenPoints;
+	private List<SpriteRenderer> numberDisplays = new List<SpriteRenderer>();
+	private List<int> scoreList = new List<int>();
 	private int tempInt;
 
 	private Sprite[] numbers;
 
 	public void Start()
 	{
-		//numbers = Resources.LoadAll("ScoreFont");
+		numbers = (Sprite[])Resources.LoadAll("ScoreFont") as Sprite[];
 	}
 
 	public void Update()
@@ -27,12 +30,27 @@ public class PlayerScore : MonoBehaviour
 			scoreDisplayedFloat = Mathf.Lerp (scoreDisplayedFloat, Score, Time.deltaTime * 0.1f);
 			scoreDisplayed = (int)scoreDisplayedFloat;
 
-			/*do
+			do
 			{
+				scoreList.Add (tempInt%10);
+				tempInt /= 10;
 
+			} while(tempInt > 0);
 
-			} while(tempInt > 0);*/
+			while(scoreList.Count > numberDisplays.Count)
+			{
+				GameObject tempObject = (GameObject)GameObject.Instantiate(basePointObject) as GameObject;
+				tempObject.transform.parent = gameObject.transform;
+				tempObject.transform.localPosition = DisplayLocation;
+				numberDisplays.Add (tempObject.GetComponent<SpriteRenderer>());
+				DisplayLocation.x -= distBetweenPoints;
+			}
 
+			for(int i = 0; i < numberDisplays.Count; i++)
+			{
+				numberDisplays[i].sprite = numbers[scoreList[i]];
+			}
+			scoreList.Clear();
 		}
 	}
 
