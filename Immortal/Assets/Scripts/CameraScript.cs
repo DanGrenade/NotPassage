@@ -13,6 +13,7 @@ public class CameraScript : MonoBehaviour
 	public Vector2 cameraPositionInMenu;
 	public float zoomInGame;
 	public GameObject protagonist;
+	public float startDist;
 	
 	public float zoomSpeed;
 
@@ -56,7 +57,7 @@ public class CameraScript : MonoBehaviour
 				rotationVector.x = Mathf.LerpAngle(rotationVector.x, 0, 0.3f);
 				RotationObject.transform.eulerAngles = rotationVector;
 
-				if(transform.position == protagonist.transform.position)
+				if((transform.position - protagonist.transform.position).sqrMagnitude <= startDist)
 				{
 					Camera.main.transform.parent = protagonist.transform;
 					Time.timeScale = 1;
