@@ -71,9 +71,19 @@ public class PlayerScore : MonoBehaviour
 
 			for(int i = 0; i < numberDisplays.Count; i++)
 			{
-				numberDisplays[i].sprite = numbers[scoreList[i]];
+				if(scoreList[i] != null)
+				{
+					numberDisplays[i].sprite = numbers[scoreList[i]];
+					numberDisplays[i].gameObject.SetActive(true);
+				}
+				else
+				{
+					numberDisplays[i].gameObject.SetActive (false);
+				}
 			}
+
 			scoreList.Clear();
+
 		}
 	}
 
@@ -85,6 +95,7 @@ public class PlayerScore : MonoBehaviour
 	public void RemoveScore(int _scoreToRemove)
 	{
 		Score -= _scoreToRemove;
+		if(Score < 0) Score = 0;
 	}
 
 }
