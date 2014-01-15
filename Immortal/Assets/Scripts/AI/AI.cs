@@ -89,7 +89,10 @@ public abstract class AI : MonoBehaviour
 
 		if(currentTime < 0)
 		{
-			Protagonist.GetComponent<PlayerScore>().RemoveScore(10);
+			if(currentAIState == AIState.Following)
+			{
+				Protagonist.GetComponent<PlayerScore>().RemoveScore(10);
+			}
 			GameObject.Destroy (gameObject);
 		}
 	}
