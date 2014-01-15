@@ -45,7 +45,7 @@ public class CameraScript : MonoBehaviour
 					Application.Quit();
 				}
 
-				rotationVector.z += rotationSpeed;
+				rotationVector.x += rotationSpeed;
 				RotationObject.transform.eulerAngles = rotationVector;
 			}
 			
@@ -53,7 +53,7 @@ public class CameraScript : MonoBehaviour
 			{
 				Camera.main.transform.position = Vector2.Lerp(Camera.main.transform.position, protagonist.transform.position, zoomSpeed);
 				Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, zoomInGame, zoomSpeed);
-				rotationVector.z = Mathf.LerpAngle(rotationVector.z, 0, 0.3f);
+				rotationVector.x = Mathf.LerpAngle(rotationVector.x, 0, 0.3f);
 				RotationObject.transform.eulerAngles = rotationVector;
 
 				if(transform.position == protagonist.transform.position)

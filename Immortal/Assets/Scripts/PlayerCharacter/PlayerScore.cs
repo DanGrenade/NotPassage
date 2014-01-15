@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerScore : MonoBehaviour 
 {
@@ -8,10 +9,22 @@ public class PlayerScore : MonoBehaviour
 
 	private float scoreDisplayedFloat = 0;
 
+	public Vector2 DisplayLocation;
+
+
+	private Sprite[] numbers;
+
+	public void Start()
+	{
+		numbers = Resources.LoadAll("ScoreFont");
+	}
+
 	public void Update()
 	{
 		scoreDisplayedFloat = Mathf.Lerp (scoreDisplayedFloat, Score, Time.deltaTime * 0.1f);
 		scoreDisplayed = (int)scoreDisplayedFloat;
+
+
 	}
 
 	public void AddScore(int _scoreToAdd)
