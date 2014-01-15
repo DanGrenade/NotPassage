@@ -52,9 +52,10 @@ public class PlayerScore : MonoBehaviour
 			scoreDisplayed = Mathf.RoundToInt(scoreDisplayedFloat);
 			tempInt = scoreDisplayed;
 
+			scoreList.Clear();
 			do
 			{
-				scoreList.Add (tempInt%10);
+				scoreList.Add (tempInt % 10);
 				tempInt /= 10;
 
 			} while(tempInt > 0);
@@ -71,18 +72,17 @@ public class PlayerScore : MonoBehaviour
 
 			for(int i = 0; i < numberDisplays.Count; i++)
 			{
-				if(scoreList[i] != null)
+				if(scoreList.Count > i)
 				{
 					numberDisplays[i].sprite = numbers[scoreList[i]];
-					numberDisplays[i].gameObject.SetActive(true);
+					numberDisplays[i].enabled = true;
 				}
 				else
 				{
-					numberDisplays[i].gameObject.SetActive (false);
+					numberDisplays[i].enabled = false;
 				}
 			}
 
-			scoreList.Clear();
 
 		}
 	}
@@ -95,7 +95,6 @@ public class PlayerScore : MonoBehaviour
 	public void RemoveScore(int _scoreToRemove)
 	{
 		Score -= _scoreToRemove;
-		if(Score < 0) Score = 0;
 	}
 
 }
