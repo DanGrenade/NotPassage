@@ -5,6 +5,7 @@ public class CameraScript : MonoBehaviour
 {
 
 	public GameObject Protagonist;
+	public GameObject Title;
 	public GameObject play;
 	public GameObject quit;
 
@@ -22,6 +23,8 @@ public class CameraScript : MonoBehaviour
 	public GameObject RotationObject;
 	private Vector3 rotationVector;
 	public float rotationSpeed;
+
+	public float timeToDisplayExit;
 
 	// Use this for initialization
 	void Start ()
@@ -42,6 +45,7 @@ public class CameraScript : MonoBehaviour
 				if(Input.GetKeyDown(KeyCode.Space))
 				{
 					InMenu = false;
+					Title.SetActive(false);
 					play.SetActive(false);
 					quit.SetActive(false);
 				}
@@ -72,7 +76,11 @@ public class CameraScript : MonoBehaviour
 		{
 			transform.position = Protagonist.transform.position;
 			transform.rotation = Protagonist.transform.rotation;
+
+			if(timeToDisplayExit < Time.time)
+			{
+
+			}
 		}
 	}
-
 }
