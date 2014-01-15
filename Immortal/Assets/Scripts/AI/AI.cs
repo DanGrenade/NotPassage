@@ -17,17 +17,17 @@ public abstract class AI : MonoBehaviour
 	#region Movement
 	private Vector3 rotate;
 
-	private float AIReactSpeed = 25f;
-	private float MaximumSpeed = 50f;
+	private float AIReactSpeed = 50f;
+	private float MaximumSpeed = 100f;
 
-	private float RunSpeed = 15f;
-	private float RunMaxSpeed = 30f;
+	private float RunSpeed = 30f;
+	private float RunMaxSpeed = 60f;
 
-	private float TowardsSpeed = 20f;
-	private float TowardsMaxSpeed = 30f;
+	private float TowardsSpeed = 40f;
+	private float TowardsMaxSpeed = 60f;
 
-	private float FollowSpeed = 30f;
-	private float FollowMaxSpeed = 40f;
+	private float FollowSpeed = 60f;
+	private float FollowMaxSpeed = 80f;
 	#endregion
 
 	#region Time

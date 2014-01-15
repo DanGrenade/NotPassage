@@ -5,7 +5,7 @@ public class MoveAroundCenterpoint : MonoBehaviour
 {
 	public Rigidbody2D PivotRotater;                                                                                                                                                                           
 	private float RotateSpeedScale = 0.2f;
-	private float xSpeed = 10.0f;
+	private float xSpeed = 20.0f;
 	private Vector3 rotatingPoint;
 
 	private float maximumDistance = 22f;
