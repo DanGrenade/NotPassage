@@ -5,6 +5,8 @@ public class CameraScript : MonoBehaviour
 {
 
 	public GameObject Protagonist;
+	public GameObject play;
+	public GameObject quit;
 
 	public bool InMenu = true;
 	public bool InGame = false;
@@ -22,7 +24,7 @@ public class CameraScript : MonoBehaviour
 	public float rotationSpeed;
 
 	// Use this for initialization
-	void Start () 
+	void Start ()
 	{
 		Camera.main.orthographicSize = zoomInMenu;
 		Camera.main.transform.position = cameraPositionInMenu;
@@ -37,9 +39,11 @@ public class CameraScript : MonoBehaviour
 		{
 			if(InMenu)
 			{
-				if(Input.GetKeyDown(KeyCode.Return))
+				if(Input.GetKeyDown(KeyCode.Space))
 				{
 					InMenu = false;
+					play.SetActive(false);
+					quit.SetActive(false);
 				}
 				if(Input.GetKeyDown (KeyCode.Escape))
 				{
