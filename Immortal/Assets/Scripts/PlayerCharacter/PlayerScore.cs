@@ -46,10 +46,11 @@ public class PlayerScore : MonoBehaviour
 
 	public void Update()
 	{
-		if(scoreDisplayed != Score)
+		if(scoreDisplayedFloat != Score)
 		{
-			scoreDisplayedFloat = Mathf.Lerp (scoreDisplayedFloat, Score, Time.deltaTime * 0.1f);
-			scoreDisplayed = (int)scoreDisplayedFloat;
+			scoreDisplayedFloat = Mathf.Lerp (scoreDisplayedFloat, Score, Time.deltaTime * 5f);
+			scoreDisplayed = Mathf.RoundToInt(scoreDisplayedFloat);
+			tempInt = scoreDisplayed;
 
 			do
 			{
@@ -62,6 +63,7 @@ public class PlayerScore : MonoBehaviour
 			{
 				GameObject tempObject = (GameObject)GameObject.Instantiate(basePointObject) as GameObject;
 				tempObject.transform.parent = gameObject.transform;
+				tempObject.transform.eulerAngles = transform.eulerAngles;
 				tempObject.transform.localPosition = DisplayLocation;
 				numberDisplays.Add (tempObject.GetComponent<SpriteRenderer>());
 				DisplayLocation.x -= distBetweenPoints;
