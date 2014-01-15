@@ -83,7 +83,15 @@ public class CameraScript : MonoBehaviour
 
 			if(timeToDisplayExit < Time.time)
 			{
-				endOfGameUI.SetActive(true);
+				if(!endOfGameUI.activeSelf)
+				{
+					endOfGameUI.SetActive(true);
+				}
+
+				if(Input.GetKeyDown (KeyCode.Escape))
+				{
+					Application.LoadLevel("GameScene");
+				}
 			}
 		}
 	}
