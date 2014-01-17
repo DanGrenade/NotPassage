@@ -16,6 +16,13 @@ public class PlayerScore : MonoBehaviour
 	private List<int> scoreList = new List<int>();
 	private int tempInt;
 
+	private List<AI> aiFollowers = new List<AI>();
+	private List<Vector2> followerPosition = new List<Vector2>();
+	public Vector2 currentPosition;
+	public float distanceBetweenAI;
+	private int numberAtInColumn;
+	private int maxInColumn = 1;
+
 	private Sprite[] numbers;
 
 	public void Start()
@@ -87,14 +94,43 @@ public class PlayerScore : MonoBehaviour
 		}
 	}
 
-	public void AddScore(int _scoreToAdd)
+	public void AddScore(int _scoreToAdd, AI _ai)
 	{
 		Score += _scoreToAdd;
+		aiFollowers.Add(_ai);
+		while(aiFollowers.Count > followerPosition.Count)
+		{
+			if(numberAtInColumn <= maxInColumn)
+			{
+				numberAtInColumn++;
+				currentPosition.y += distanceBetweenAI;
+				followerPosition.Add(currentPosition);
+
+			}
+			else
+			{
+				numberAtInColumn = 2;
+				maxInColumn++;
+				currentPosition.x -= distanceBetweenAI;
+				currentPosition.y = -(distanceBetweenAI * (maxInColumn/2));
+
+				followerPosition.Add(currentPosition);
+
+			}
+		}
+
+		aiFollowers[aiFollowers.Count - 1].FollowGoTo = followerPosition[aiFollowers.Count - 1];
 	}
 
-	public void RemoveScore(int _scoreToRemove)
+	public void RemoveScore(int _scoreToRemove, AI _ai)
 	{
 		Score -= _scoreToRemove;
+		aiFollowers.Remove(_ai);
+
+		for(int i = 0; i < aiFollowers.Count; i++)
+		{
+			aiFollowers[i].FollowGoTo = followerPosition[i];
+		}
 	}
 
 }

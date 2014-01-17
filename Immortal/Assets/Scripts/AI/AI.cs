@@ -10,12 +10,13 @@ public abstract class AI : MonoBehaviour
 	protected AIState currentAIState;
 
 	public Vector2 PivotRotater;
-
-	[System.NonSerialized]
+	
 	private GameObject Protagonist;
 
 	#region Movement
 	private Vector3 rotate;
+	[System.NonSerialized]
+	public Vector2  FollowGoTo;
 
 	private float AIReactSpeed = 50f;
 	private float MaximumSpeed = 100f;
@@ -74,7 +75,7 @@ public abstract class AI : MonoBehaviour
 			}
 			break;
 		case AIState.Following:
-			rigidbody2D.velocity = Vector2.ClampMagnitude(((rigidbody2D.velocity + (Vector2)Protagonist.transform.position - (Vector2)transform.position).normalized * Time.deltaTime * FollowSpeed), FollowMaxSpeed);
+			rigidbody2D.velocity = Vector2.ClampMagnitude(((rigidbody2D.velocity + (FollowGoTo - (Vector2)Protagonist.transform.position) - (Vector2)transform.position).normalized * Time.deltaTime * FollowSpeed), FollowMaxSpeed);
 
 			break;
 		}
@@ -91,7 +92,7 @@ public abstract class AI : MonoBehaviour
 		{
 			if(currentAIState == AIState.Following)
 			{
-				Protagonist.GetComponent<PlayerScore>().RemoveScore(1);
+				Protagonist.GetComponent<PlayerScore>().RemoveScore(1, this);
 			}
 			GameObject.Destroy (gameObject);
 		}
@@ -102,7 +103,7 @@ public abstract class AI : MonoBehaviour
 		if(other.tag == "Player" && currentAIState != AIState.Following)
 		{
 			currentAIState = AIState.Following;
-			Protagonist.GetComponent<PlayerScore>().AddScore(1);
+			Protagonist.GetComponent<PlayerScore>().AddScore(1, this);
 		}
 	}
 }
