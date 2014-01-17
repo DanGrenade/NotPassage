@@ -75,7 +75,7 @@ public abstract class AI : MonoBehaviour
 			}
 			break;
 		case AIState.Following:
-			rigidbody2D.velocity = Vector2.ClampMagnitude(((rigidbody2D.velocity + (FollowGoTo - (Vector2)Protagonist.transform.position) - (Vector2)transform.position).normalized * Time.deltaTime * FollowSpeed), FollowMaxSpeed);
+			rigidbody2D.velocity = Vector2.ClampMagnitude(((rigidbody2D.velocity + (Vector2)((Vector2)Protagonist.transform.TransformPoint(FollowGoTo) - (Vector2)transform.position)).normalized * Time.deltaTime * FollowSpeed), FollowMaxSpeed);
 
 			break;
 		}
