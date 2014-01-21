@@ -4,7 +4,7 @@ using System.Collections;
 public class DeterioratingWorld : MonoBehaviour 
 {
 	public float[] deteriorateTimes;
-	public Sprite[] detriorateSprites;
+	public Sprite[] deteriorateSprites;
 
 	public CameraScript gameControl;
 
@@ -12,6 +12,10 @@ public class DeterioratingWorld : MonoBehaviour
 	private int currentSprite;
 
 	private SpriteRenderer spriter;
+	private Color worldOne;
+
+
+	public SpriteRenderer secondaryWorld;
 
 	void Start()
 	{
@@ -38,9 +42,24 @@ public class DeterioratingWorld : MonoBehaviour
 			}
 		}
 
-		if(spriter.sprite != detriorateSprites[currentSprite])
+		if(spriter.sprite != deteriorateSprites[currentSprite])
 		{
-			spriter.sprite = detriorateSprites[currentSprite];
+			worldOne = spriter.color;
+			worldOne.a = Mathf.Lerp(worldOne.a, 0, Time.deltaTime * 1f);
+
+			spriter.color = worldOne;
+
+			if(worldOne.a < 0.001f)
+			{
+				spriter.sprite = deteriorateSprites[currentSprite];
+				worldOne.a = 1;
+				spriter.color = worldOne;
+
+				if(deteriorateSprites.Length < currentSprite + 1)
+				{
+					secondaryWorld.sprite = deteriorateSprites[currentSprite + 1];					                                
+				}
+			}
 		}
 	}
 }
