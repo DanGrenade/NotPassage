@@ -63,7 +63,7 @@ public abstract class AI : MonoBehaviour
 
 	public void Update()
 	{
-		if(!aged && timeToOld <= currentTime)
+		if(!aged && timeToOld >= currentTime)
 		{
 			aged = true;
 			gameObject.GetComponent<SpriteRenderer>().sprite = spriteWhenOld;
