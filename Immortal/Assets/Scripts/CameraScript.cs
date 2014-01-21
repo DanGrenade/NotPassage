@@ -8,6 +8,8 @@ public class CameraScript : MonoBehaviour
 	public GameObject Title;
 	public GameObject play;
 	public GameObject quit;
+	public GameObject controlsup;
+	public GameObject controlsdown;
 
 	public GameObject endOfGameUI;
 
@@ -53,6 +55,8 @@ public class CameraScript : MonoBehaviour
 					Title.SetActive(false);
 					play.SetActive(false);
 					quit.SetActive(false);
+					controlsup.SetActive(false);
+					controlsdown.SetActive(false);
 				}
 				if(Input.GetKeyDown (KeyCode.Escape))
 				{
