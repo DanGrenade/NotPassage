@@ -13,7 +13,8 @@ public class CameraScript : MonoBehaviour
 
 	public bool InMenu = true;
 	public bool InGame = false;
-	
+
+	public float zoomOutSpeed;
 	public float zoomInMenu;
 	public Vector2 cameraPositionInMenu;
 	public float zoomInGame;
@@ -80,6 +81,9 @@ public class CameraScript : MonoBehaviour
 		{
 			transform.position = Protagonist.transform.position;
 			transform.rotation = Protagonist.transform.rotation;
+
+			Camera.main.orthographicSize += (zoomOutSpeed * Time.deltaTime);
+
 
 			if(timeToDisplayExit < Time.time)
 			{
