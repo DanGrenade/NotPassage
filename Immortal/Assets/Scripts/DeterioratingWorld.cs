@@ -14,6 +14,7 @@ public class DeterioratingWorld : MonoBehaviour
 	private SpriteRenderer spriter;
 	private Color worldOne;
 
+	public float transitionSpeed;
 
 	public SpriteRenderer secondaryWorld;
 
@@ -44,12 +45,17 @@ public class DeterioratingWorld : MonoBehaviour
 
 		if(spriter.sprite != deteriorateSprites[currentSprite])
 		{
+			worldOne.a = 1;
+			secondaryWorld.color = worldOne;
+
 			worldOne = spriter.color;
-			worldOne.a = Mathf.Lerp(worldOne.a, 0, Time.deltaTime * 1f);
+
+
+			worldOne.a = Mathf.Lerp(worldOne.a, 0, Time.deltaTime * transitionSpeed);
 
 			spriter.color = worldOne;
 
-			if(worldOne.a < 0.001f)
+			if(worldOne.a < 0.0001f)
 			{
 				spriter.sprite = deteriorateSprites[currentSprite];
 				worldOne.a = 1;
@@ -59,6 +65,8 @@ public class DeterioratingWorld : MonoBehaviour
 				{
 					secondaryWorld.sprite = deteriorateSprites[currentSprite + 1];					                                
 				}
+				worldOne.a = 0;
+				secondaryWorld.color = worldOne;
 			}
 		}
 	}
