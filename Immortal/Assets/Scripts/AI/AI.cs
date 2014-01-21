@@ -35,6 +35,10 @@ public abstract class AI : MonoBehaviour
 	public float MaxTime;
 	private float currentTime;
 	public float AgeSpeed;
+
+	private bool aged = false;
+	public float timeToOld;
+	public Sprite spriteWhenOld;
 	#endregion
 
 	public void Awake()
@@ -59,6 +63,12 @@ public abstract class AI : MonoBehaviour
 
 	public void Update()
 	{
+		if(!aged && timeToOld <= currentTime)
+		{
+			aged = true;
+			gameObject.GetComponent<SpriteRenderer>().sprite = spriteWhenOld;
+		}
+
 		switch(currentAIState)
 		{
 		case AIState.Run:

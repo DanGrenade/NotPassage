@@ -25,6 +25,9 @@ public class PlayerScore : MonoBehaviour
 
 	private Sprite[] numbers;
 
+
+	public GameObject gravestonePrefab;
+
 	public void Start()
 	{
 		numbers = Resources.LoadAll<Sprite>("ScoreFont");
@@ -124,6 +127,8 @@ public class PlayerScore : MonoBehaviour
 
 	public void RemoveScore(int _scoreToRemove, AI _ai)
 	{
+		GameObject.Instantiate(gravestonePrefab, _ai.transform.position, _ai.transform.rotation);
+
 		Score -= _scoreToRemove;
 		aiFollowers.Remove(_ai);
 
