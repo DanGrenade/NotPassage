@@ -25,6 +25,9 @@ public class PlayerScore : MonoBehaviour
 
 	private Sprite[] numbers;
 
+	public GameObject pointParent;
+	private bool bounce = false;
+
 
 	public GameObject gravestonePrefab;
 
@@ -48,28 +51,11 @@ public class PlayerScore : MonoBehaviour
 		while(scoreList.Count > numberDisplays.Count)
 		{
 			GameObject tempObject = (GameObject)GameObject.Instantiate(basePointObject) as GameObject;
-			tempObject.transform.parent = gameObject.transform;
+			tempObject.transform.parent = pointParent.transform;
 			tempObject.transform.localPosition = DisplayLocation;
 			numberDisplays.Add (tempObject.GetComponent<SpriteRenderer>());
 			DisplayLocation.x -= distBetweenPoints;
 
-		}
-
-		if(numberDisplays.Count % 2 != 0)
-		{
-			int leftMost = (numberDisplays.Count - 1)/2;
-			for(int i = 0; i < numberDisplays.Count; i++)
-			{
-				numberDisplays[i].transform.localPosition = -Vector2.right * distBetweenPoints * ((i - leftMost) + leftMost / 2);
-			}
-		}
-		else
-		{
-			int leftMost = numberDisplays.Count/2;
-			for(int i = 0; i < numberDisplays.Count; i++)
-			{
-				numberDisplays[i].transform.localPosition = -Vector2.up * distBetweenPoints * (i - leftMost);
-			}
 		}
 		
 		for(int i = 0; i < numberDisplays.Count; i++)
@@ -83,7 +69,7 @@ public class PlayerScore : MonoBehaviour
 	{
 		if(scoreDisplayedFloat != Score)
 		{
-			scoreDisplayedFloat = Mathf.Lerp (scoreDisplayedFloat, Score, Time.deltaTime * 5f);
+			scoreDisplayedFloat = Mathf.Lerp (scoreDisplayedFloat, Score, 1f);
 			scoreDisplayed = Mathf.RoundToInt(scoreDisplayedFloat);
 			tempInt = scoreDisplayed;
 
@@ -98,9 +84,10 @@ public class PlayerScore : MonoBehaviour
 			while(scoreList.Count > numberDisplays.Count)
 			{
 				GameObject tempObject = (GameObject)GameObject.Instantiate(basePointObject) as GameObject;
-				tempObject.transform.parent = gameObject.transform;
-				tempObject.transform.eulerAngles = transform.eulerAngles;
+				tempObject.transform.parent = pointParent.transform;
+				tempObject.transform.eulerAngles = pointParent.transform.eulerAngles;
 				tempObject.transform.localPosition = DisplayLocation;
+				tempObject.transform.localScale = numberDisplays[numberDisplays.Count - 1].transform.localScale;
 				numberDisplays.Add (tempObject.GetComponent<SpriteRenderer>());
 				DisplayLocation.x -= distBetweenPoints;
 			}
@@ -120,6 +107,23 @@ public class PlayerScore : MonoBehaviour
 
 		}
 
+		if(numberDisplays.Count % 2 != 0)
+		{
+			int leftMost = (numberDisplays.Count - 1)/2;
+			for(int i = 0; i < numberDisplays.Count; i++)
+			{
+				numberDisplays[i].transform.localPosition = -Vector2.right * distBetweenPoints * ((i - (float)leftMost) - (float)leftMost/2);
+			}
+		}
+		else
+		{
+			int leftMost = numberDisplays.Count/2;
+			for(int i = 0; i < numberDisplays.Count; i++)
+			{
+				numberDisplays[i].transform.localPosition = -Vector2.right * distBetweenPoints * ((i - (float)leftMost) + (float)leftMost/2);
+			}
+		}
+
 		if (Score == statueScore && statueExists == false) 
 		{
 			Instantiate(statuePrefab, transform.position, transform.rotation);
@@ -131,6 +135,15 @@ public class PlayerScore : MonoBehaviour
 			secondStatueExists = true;
 		}
 
+		if(bounce)
+		{
+			pointParent.transform.localScale = Vector2.Lerp(pointParent.transform.localScale, Vector2.one, 0.2f);
+			if(pointParent.transform.localScale.x < 0.01f)
+			{
+				pointParent.transform.localScale = Vector2.one;
+				bounce = false;
+			}
+		}
 	}
 
 	public void AddScore(int _scoreToAdd, AI _ai)
@@ -154,9 +167,11 @@ public class PlayerScore : MonoBehaviour
 				currentPosition.y = -(distanceBetweenAI * (maxInColumn/2));
 
 				followerPosition.Add(currentPosition);
-
 			}
 		}
+
+		pointParent.transform.localScale = Vector2.one * 1.5f;
+		bounce = true;
 
 		aiFollowers[aiFollowers.Count - 1].FollowGoTo = followerPosition[aiFollowers.Count - 1];
 	}

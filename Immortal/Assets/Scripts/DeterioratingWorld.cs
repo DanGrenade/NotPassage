@@ -35,7 +35,6 @@ public class DeterioratingWorld : MonoBehaviour
 		{
 			time += Time.deltaTime;
 		}
-		Debug.Log (time);
 
 		for(int i = 0; i < deteriorateTimes.Length; i++)
 		{
