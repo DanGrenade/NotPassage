@@ -27,7 +27,7 @@ public class DeterioratingWorld : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if(gameControl.InGame)
+		if(!gameControl.InGame)
 		{
 			time = 0;
 		}
@@ -35,10 +35,11 @@ public class DeterioratingWorld : MonoBehaviour
 		{
 			time += Time.deltaTime;
 		}
+		Debug.Log (time);
 
 		for(int i = 0; i < deteriorateTimes.Length; i++)
 		{
-			if(time <= deteriorateTimes[i])
+			if(time >= deteriorateTimes[i])
 			{
 				currentSprite = i;
 			}

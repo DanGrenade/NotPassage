@@ -28,6 +28,13 @@ public class PlayerScore : MonoBehaviour
 
 	public GameObject gravestonePrefab;
 
+	public GameObject statuePrefab;
+	public float statueScore;
+	private bool statueExists = false;
+	public GameObject secondStatuePrefab;
+	public float secondStatueScore;
+	private bool secondStatueExists = false;
+
 	public void Start()
 	{
 		numbers = Resources.LoadAll<Sprite>("ScoreFont");
@@ -111,8 +118,19 @@ public class PlayerScore : MonoBehaviour
 				}
 			}
 
-
 		}
+
+		if (Score == statueScore && statueExists == false) 
+		{
+			Instantiate(statuePrefab, transform.position, transform.rotation);
+			statueExists = true;
+		}
+		if (Score == secondStatueScore && secondStatueExists == false) 
+		{
+			Instantiate(secondStatuePrefab, transform.position, transform.rotation);
+			secondStatueExists = true;
+		}
+
 	}
 
 	public void AddScore(int _scoreToAdd, AI _ai)
