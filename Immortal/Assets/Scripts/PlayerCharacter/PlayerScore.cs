@@ -31,6 +31,9 @@ public class PlayerScore : MonoBehaviour
 	public GameObject statuePrefab;
 	public float statueScore;
 	private bool statueExists = false;
+	public GameObject secondStatuePrefab;
+	public float secondStatueScore;
+	private bool secondStatueExists = false;
 
 	public void Start()
 	{
@@ -119,6 +122,11 @@ public class PlayerScore : MonoBehaviour
 		{
 			Instantiate(statuePrefab, transform.position, transform.rotation);
 			statueExists = true;
+		}
+		if (Score == secondStatueScore && secondStatueExists == false) 
+		{
+			Instantiate(secondStatuePrefab, transform.position, transform.rotation);
+			secondStatueExists = true;
 		}
 
 	}
