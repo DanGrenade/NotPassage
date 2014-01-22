@@ -13,6 +13,7 @@ public class DeterioratingWorld : MonoBehaviour
 
 	private SpriteRenderer spriter;
 	private Color worldOne;
+	private Color worldTwo;
 
 	public float transitionSpeed;
 
@@ -45,13 +46,15 @@ public class DeterioratingWorld : MonoBehaviour
 
 		if(spriter.sprite != deteriorateSprites[currentSprite])
 		{
-			worldOne.a = 1;
-			secondaryWorld.color = worldOne;
 
 			worldOne = spriter.color;
+			worldTwo = worldOne;
 
 
 			worldOne.a = Mathf.Lerp(worldOne.a, 0, Time.deltaTime * transitionSpeed);
+			worldTwo.a = 1 - worldOne.a;
+			secondaryWorld.color = worldTwo;
+
 
 			spriter.color = worldOne;
 
