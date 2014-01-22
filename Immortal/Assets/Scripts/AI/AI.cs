@@ -19,7 +19,7 @@ public abstract class AI : MonoBehaviour
 	public Vector2  FollowGoTo;
 
 	private float AIReactSpeed = 50f;
-	private float MaximumSpeed = 100f;
+	private float MaximumSpeed = 150f;
 
 	private float RunSpeed = 30f;
 	private float RunMaxSpeed = 60f;
