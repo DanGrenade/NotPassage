@@ -31,7 +31,7 @@ public class CameraScript : MonoBehaviour
 
 	public float rotateReturnSpeed;
 
-	public float timeToDisplayExit = 1500f;
+	public float timeToDisplayExit = 800f;
 
 	// Use this for initialization
 	void Start ()
