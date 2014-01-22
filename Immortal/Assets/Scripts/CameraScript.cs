@@ -76,7 +76,7 @@ public class CameraScript : MonoBehaviour
 				rotationVector.z = Mathf.LerpAngle(rotationVector.z, 0, rotateReturnSpeed);
 				RotationObject.transform.eulerAngles = rotationVector;
 
-				if((transform.position - protagonist.transform.position).sqrMagnitude <= startDist)
+				if(Camera.main.orthographicSize - zoomInGame <= startDist)
 				{
 					Camera.main.transform.parent = protagonist.transform;
 					Time.timeScale = 1;
