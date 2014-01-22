@@ -29,6 +29,8 @@ public class CameraScript : MonoBehaviour
 	private Vector3 rotationVector;
 	public float rotationSpeed;
 
+	public float rotateReturnSpeed;
+
 	public float timeToDisplayExit = 1500f;
 
 	// Use this for initialization
@@ -71,7 +73,7 @@ public class CameraScript : MonoBehaviour
 			{
 				Camera.main.transform.position = Vector2.Lerp(Camera.main.transform.position, protagonist.transform.position, zoomSpeed);
 				Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, zoomInGame, zoomSpeed);
-				rotationVector.z = Mathf.LerpAngle(rotationVector.z, 0, 0.3f);
+				rotationVector.z = Mathf.LerpAngle(rotationVector.z, 0, rotateReturnSpeed);
 				RotationObject.transform.eulerAngles = rotationVector;
 
 				if((transform.position - protagonist.transform.position).sqrMagnitude <= startDist)
