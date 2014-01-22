@@ -45,6 +45,22 @@ public class PlayerScore : MonoBehaviour
 			tempObject.transform.localPosition = DisplayLocation;
 			numberDisplays.Add (tempObject.GetComponent<SpriteRenderer>());
 			DisplayLocation.x -= distBetweenPoints;
+
+			if(numberDisplays.Count % 2 != 0)
+			{
+				for(int i = 0; i < numberDisplays.Count; i++)
+				{
+
+				}
+			}
+			else
+			{
+				for(int i = 0; i < numberDisplays.Count; i++)
+				{
+					
+				}
+			}
+
 		}
 		
 		for(int i = 0; i < numberDisplays.Count; i++)

@@ -78,6 +78,7 @@ public class CameraScript : MonoBehaviour
 				{
 					Camera.main.transform.parent = protagonist.transform;
 					Time.timeScale = 1;
+					InGame = true;
 				}
 			}
 		}
