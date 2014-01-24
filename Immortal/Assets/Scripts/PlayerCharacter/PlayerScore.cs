@@ -137,7 +137,7 @@ public class PlayerScore : MonoBehaviour
 
 		if(bounce)
 		{
-			pointParent.transform.localScale = Vector2.Lerp(pointParent.transform.localScale, Vector2.one, 0.2f);
+			pointParent.transform.localScale = Vector2.Lerp(pointParent.transform.localScale, Vector2.one * 1.5f, 0.2f);
 			if(pointParent.transform.localScale.x < 0.01f)
 			{
 				pointParent.transform.localScale = Vector2.one;
@@ -170,7 +170,7 @@ public class PlayerScore : MonoBehaviour
 			}
 		}
 
-		pointParent.transform.localScale = Vector2.one * 1.5f;
+		pointParent.transform.localScale = Vector2.one * 2.5f;
 		bounce = true;
 
 		aiFollowers[aiFollowers.Count - 1].FollowGoTo = followerPosition[aiFollowers.Count - 1];
