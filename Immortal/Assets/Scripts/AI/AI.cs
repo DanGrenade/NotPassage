@@ -82,7 +82,7 @@ public abstract class AI : MonoBehaviour
 		case AIState.Run:
 			if((Protagonist.transform.position - transform.position).sqrMagnitude < 4)
 			{
-				rigidbody2D.velocity = Vector2.ClampMagnitude(rigidbody2D.velocity + (VectorToPlayer).normalized * Time.deltaTime * RunSpeed, RunMaxSpeed);
+				rigidbody2D.velocity = Vector2.ClampMagnitude((rigidbody2D.velocity + VectorToPlayer).normalized * Time.deltaTime * RunSpeed, RunMaxSpeed);
 			}
 			break;
 		case AIState.MoveTowards:
