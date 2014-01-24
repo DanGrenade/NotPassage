@@ -27,6 +27,9 @@ public class PlayerScore : MonoBehaviour
 
 	public GameObject pointParent;
 	private bool bounce = false;
+	public float defaultBounce;
+	public float scaledBounce;
+	public float pointScale;
 
 
 	public GameObject gravestonePrefab;
@@ -137,7 +140,7 @@ public class PlayerScore : MonoBehaviour
 
 		if(bounce)
 		{
-			pointParent.transform.localScale = Vector2.Lerp(pointParent.transform.localScale, Vector2.one * 1.5f, 0.2f);
+			pointParent.transform.localScale = Vector2.Lerp(pointParent.transform.localScale, Vector2.one * (pointScale + (pointScale * Score)), 0.2f);
 			if(pointParent.transform.localScale.x < 0.01f)
 			{
 				pointParent.transform.localScale = Vector2.one;
@@ -170,7 +173,7 @@ public class PlayerScore : MonoBehaviour
 			}
 		}
 
-		pointParent.transform.localScale = Vector2.one * 2.5f;
+		pointParent.transform.localScale = Vector2.one * (defaultBounce + (pointScale * Score));
 		bounce = true;
 
 		aiFollowers[aiFollowers.Count - 1].FollowGoTo = followerPosition[aiFollowers.Count - 1];
