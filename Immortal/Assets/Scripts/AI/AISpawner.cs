@@ -36,6 +36,7 @@ public class AISpawner : MonoBehaviour
 		currentTime = MaxTime;
 		render = gameObject.GetComponent<SpriteRenderer> ();
 		birds = (GameObject)Resources.Load ("Birds") as GameObject;
+		nextAISpawnTime += TimerStates[0];
 	}
 
 	public void Update()
