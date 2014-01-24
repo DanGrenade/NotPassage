@@ -99,12 +99,9 @@ public abstract class AI : MonoBehaviour
 		}
 
 		rotation = Vector2.Angle (VectorToPlayer, Vector2.up);
-		if(Protagonist.transform.position.y < transform.position.y)
-		{
-			rotation *= -1;
-		}
+		if(Protagonist.transform.position.y < transform.position.y)	rotation *= -1;
 
-		rotationHolder.x = rotation;
+		rotationHolder.z = rotation;
 		eyeOne.transform.eulerAngles = rotationHolder;
 		eyeTwo.transform.eulerAngles = rotationHolder;
 		
