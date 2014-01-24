@@ -11,13 +11,19 @@ Platform assembly: C:\Users\jacob.berry\Desktop\GitHub\NotPassage\Immortal\Immor
 Loading C:\Users\jacob.berry\Desktop\GitHub\NotPassage\Immortal\ImmortalVerson2_Data\Managed\UnityEngine.dll into Unity Child Domain
 Platform assembly: C:\Users\jacob.berry\Desktop\GitHub\NotPassage\Immortal\ImmortalVerson2_Data\Managed\Assembly-CSharp.dll (this message is harmless)
 Loading C:\Users\jacob.berry\Desktop\GitHub\NotPassage\Immortal\ImmortalVerson2_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-- Completed reload, in  0.037 seconds
+- Completed reload, in  0.040 seconds
 desktop: 1280x1024 60Hz; virtual: 2560x1024 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-UnloadTime: 0.582805 ms
+UnloadTime: 1.297625 ms
 Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 21 unused Assets to reduce memory usage. Loaded Objects now: 729.
-Total: 0.572825 ms (FindLiveObjects: 0.017963 ms CreateObjectMapping: 0.011120 ms MarkObjects: 0.090956 ms  DeleteObjects: 0.031649 ms)
+Unloading 21 unused Assets to reduce memory usage. Loaded Objects now: 925.
+Total: 0.610177 ms (FindLiveObjects: 0.025376 ms CreateObjectMapping: 0.010834 ms MarkObjects: 0.114337 ms  DeleteObjects: 0.047616 ms)
+
+UnloadTime: 1.342390 ms
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 21 unused Assets to reduce memory usage. Loaded Objects now: 925.
+Total: 0.588222 ms (FindLiveObjects: 0.021954 ms CreateObjectMapping: 0.011405 ms MarkObjects: 0.117473 ms  DeleteObjects: 0.032504 ms)
 

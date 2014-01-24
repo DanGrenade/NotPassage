@@ -27,7 +27,7 @@ public class PlayerScore : MonoBehaviour
 
 	public GameObject pointParent;
 	private bool bounce = false;
-	public float defaultBounce;
+	public float defaultSize;
 	public float scaledBounce;
 	public float pointScale;
 
@@ -40,6 +40,9 @@ public class PlayerScore : MonoBehaviour
 	public GameObject secondStatuePrefab;
 	public float secondStatueScore;
 	private bool secondStatueExists = false;
+	public GameObject thirdStatuePrefab;
+	public float thirdStatueScore;
+	private bool thirdStatueExists = false;
 
 	public void Start()
 	{
@@ -137,10 +140,15 @@ public class PlayerScore : MonoBehaviour
 			Instantiate(secondStatuePrefab, transform.position, transform.rotation);
 			secondStatueExists = true;
 		}
+		if (Score == thirdStatueScore && thirdStatueExists == false) 
+		{
+			Instantiate(thirdStatuePrefab, transform.position, transform.rotation);
+			thirdStatueExists = true;
+		}
 
 		if(bounce)
 		{
-			pointParent.transform.localScale = Vector2.Lerp(pointParent.transform.localScale, Vector2.one * (pointScale + (pointScale * Score)), 0.2f);
+			pointParent.transform.localScale = Vector2.Lerp(pointParent.transform.localScale, Vector2.one * (defaultSize + (pointScale * Score)), 0.2f);
 			if(pointParent.transform.localScale.x < 0.01f)
 			{
 				pointParent.transform.localScale = Vector2.one;
@@ -173,7 +181,7 @@ public class PlayerScore : MonoBehaviour
 			}
 		}
 
-		pointParent.transform.localScale = Vector2.one * (defaultBounce + (pointScale * Score));
+		pointParent.transform.localScale = Vector2.one * (scaledBounce + (pointScale * Score));
 		bounce = true;
 
 		aiFollowers[aiFollowers.Count - 1].FollowGoTo = followerPosition[aiFollowers.Count - 1];
