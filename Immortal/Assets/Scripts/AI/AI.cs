@@ -129,7 +129,7 @@ public abstract class AI : MonoBehaviour
 		}
 	}
 
-	void OnTriggerEnter2D(Collider2D other)
+	public void ChildTriggerEnter2D(Collider2D other)
 	{
 		if(other.tag == "Player" && currentAIState != AIState.Following)
 		{
