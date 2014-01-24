@@ -19,13 +19,13 @@ public abstract class AI : MonoBehaviour
 	public Vector2  FollowGoTo;
 
 	private float RunSpeed = 15f;
-	private float RunMaxSpeed = 30f;
+	private float RunMaxSpeed = 20f;
 
-	private float TowardsSpeed = 20f;
-	private float TowardsMaxSpeed = 30f;
+	private float TowardsSpeed = 10f;
+	private float TowardsMaxSpeed = 15f;
 
-	private float FollowSpeed = 40f;
-	private float FollowMaxSpeed = 50f;
+	private float FollowSpeed = 30f;
+	private float FollowMaxSpeed = 40f;
 	#endregion
 
 	#region Time

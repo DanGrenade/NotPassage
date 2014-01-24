@@ -62,36 +62,17 @@ public class AISpawner : MonoBehaviour
 				switch(currentState)
 				{
 				case AreaState.One:
-					if(nextAISpawnTime - Time.time > TimerStates[0])
-					{
-						nextAISpawnTime = Time.time + TimerStates[0];
-					}
 					nextAISpawnTime += TimerStates[0];
-					if(nextAISpawnTime - Time.time > TimerStates[0])
-					{
-						nextAISpawnTime = Time.time + TimerStates[0];
-					}
 					break;
 				case AreaState.Two:
 					nextAISpawnTime += TimerStates[1];
-					if(nextAISpawnTime - Time.time > TimerStates[1])
-					{
-						nextAISpawnTime = Time.time + TimerStates[1];
-					}
 					break;
 				case AreaState.Three:
 					nextAISpawnTime += TimerStates[2];
-					if(nextAISpawnTime - Time.time > TimerStates[2])
-					{
-						nextAISpawnTime = Time.time + TimerStates[2];
-					}
 					break;
 				case AreaState.Four:
 					nextAISpawnTime += TimerStates[3];
-					if(nextAISpawnTime - Time.time > TimerStates[3])
-					{
-						nextAISpawnTime = Time.time + TimerStates[3];
-					}
+
 					break;
 				}
 			}
@@ -108,6 +89,10 @@ public class AISpawner : MonoBehaviour
 					currentState = AreaState.Two;
 					render.sprite = sprites[1];
 				}
+				if(nextAISpawnTime - Time.time > TimerStates[0])
+				{
+					nextAISpawnTime = Time.time + TimerStates[0];
+				}
 				break;
 			case AreaState.Two:
 				if(currentTime < timeForStates[1])
@@ -115,12 +100,20 @@ public class AISpawner : MonoBehaviour
 					currentState = AreaState.Three;
 					render.sprite = sprites[2];
 				}
+				if(nextAISpawnTime - Time.time > TimerStates[1])
+				{
+					nextAISpawnTime = Time.time + TimerStates[1];
+				}
 				break;
 			case AreaState.Three:
 				if(currentTime < timeForStates[2])
 				{
 					currentState = AreaState.Four;
 					render.sprite = sprites[3];
+				}
+				if(nextAISpawnTime - Time.time > TimerStates[2])
+				{
+					nextAISpawnTime = Time.time + TimerStates[2];
 				}
 				break;
 			case AreaState.Four:
