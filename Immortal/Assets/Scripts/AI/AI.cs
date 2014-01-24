@@ -38,7 +38,7 @@ public abstract class AI : MonoBehaviour
 	public Sprite spriteWhenOld;
 	#endregion
 
-
+	public bool hasGooglyEyes;
 	private Vector2 VectorToPlayer;
 	private Vector3 rotationHolder;
 	private float rotation;
@@ -55,7 +55,7 @@ public abstract class AI : MonoBehaviour
 
 		Protagonist = GameObject.FindGameObjectWithTag ("Player");
 
-		rotationHolder = eyeOne.transform.eulerAngles;
+		if(hasGooglyEyes)	rotationHolder = eyeOne.transform.eulerAngles;
 
 		currentTime = MaxTime;
 
@@ -98,14 +98,17 @@ public abstract class AI : MonoBehaviour
 			break;
 		}
 
-		rotation = Vector2.Angle (Vector2.up, VectorToPlayer);
-		if(Protagonist.transform.position.x > transform.position.x)	rotation *= -1;
-		rotation = 360 - rotation;
-		rotation -= 90;
+		if(hasGooglyEyes)
+		{
+			rotation = Vector2.Angle (Vector2.up, VectorToPlayer);
+			if(Protagonist.transform.position.x > transform.position.x)	rotation *= -1;
+			rotation = 360 - rotation;
+			rotation -= 90;
 
-		rotationHolder.z = rotation;
-		eyeOne.transform.eulerAngles = rotationHolder;
-		eyeTwo.transform.eulerAngles = rotationHolder;
+			rotationHolder.z = rotation;
+			eyeOne.transform.eulerAngles = rotationHolder;
+			eyeTwo.transform.eulerAngles = rotationHolder;
+		}
 		
 
 		rotate = transform.eulerAngles;
