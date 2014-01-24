@@ -38,6 +38,13 @@ public abstract class AI : MonoBehaviour
 	public Sprite spriteWhenOld;
 	#endregion
 
+
+	private Vector2 VectorToPlayer;
+	private Vector3 rotationHolder;
+	private float rotation;
+	public GameObject eyeOne;
+	public GameObject eyeTwo;
+
 	public void Awake()
 	{
 		rotate = transform.eulerAngles;
@@ -47,6 +54,8 @@ public abstract class AI : MonoBehaviour
 		transform.eulerAngles = rotate;
 
 		Protagonist = GameObject.FindGameObjectWithTag ("Player");
+
+		rotationHolder = eyeOne.transform.eulerAngles;
 
 		currentTime = MaxTime;
 
@@ -66,18 +75,20 @@ public abstract class AI : MonoBehaviour
 			gameObject.GetComponent<SpriteRenderer>().sprite = spriteWhenOld;
 		}
 
+		VectorToPlayer = (Vector2)transform.position - (Vector2)Protagonist.transform.position;
+
 		switch(currentAIState)
 		{
 		case AIState.Run:
 			if((Protagonist.transform.position - transform.position).sqrMagnitude < 2)
 			{
-				rigidbody2D.velocity = Vector2.ClampMagnitude(((rigidbody2D.velocity + ((Vector2)transform.position - (Vector2)Protagonist.transform.position)).normalized * Time.deltaTime * RunSpeed), RunMaxSpeed);
+				rigidbody2D.velocity = Vector2.ClampMagnitude((rigidbody2D.velocity + (VectorToPlayer).normalized * Time.deltaTime * RunSpeed), RunMaxSpeed);
 			}
 			break;
 		case AIState.MoveTowards:
 			if((Protagonist.transform.position - transform.position).sqrMagnitude < 2)
 			{
-				rigidbody2D.velocity = Vector2.ClampMagnitude(((rigidbody2D.velocity + (Vector2)Protagonist.transform.position - (Vector2)transform.position) * Time.deltaTime * TowardsSpeed), TowardsMaxSpeed);
+					rigidbody2D.velocity = Vector2.ClampMagnitude(((rigidbody2D.velocity + VectorToPlayer) * Time.deltaTime * TowardsSpeed), TowardsMaxSpeed);
 
 			}
 			break;
@@ -86,6 +97,17 @@ public abstract class AI : MonoBehaviour
 
 			break;
 		}
+
+		rotation = Vector2.Angle (VectorToPlayer, Vector2.up);
+		if(Protagonist.transform.position.y < transform.position.y)
+		{
+			rotation *= -1;
+		}
+
+		rotationHolder.x = rotation;
+		eyeOne.transform.eulerAngles = rotationHolder;
+		eyeTwo.transform.eulerAngles = rotationHolder;
+		
 
 		rotate = transform.eulerAngles;
 		rotate.z = Vector2.Angle (Vector2.up, PivotRotater - (Vector2)transform.position);
