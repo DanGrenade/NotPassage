@@ -38,13 +38,14 @@ public class AISpawner : MonoBehaviour
 		currentTime = MaxTime;
 		render = gameObject.GetComponent<SpriteRenderer> ();
 		birds = (GameObject)Resources.Load ("Birds") as GameObject;
-		nextAISpawnTime += TimerStates[0];
+		nextAISpawnTime = TimerStates[0] + Time.time;
 
 		Vector3 rotate = transform.eulerAngles;
 		rotate.z = Vector2.Angle (Vector2.up, PivotRotater - (Vector2)transform.position);
 		if (PivotRotater.x < transform.position.x) rotate.z -= 180;
 		else rotate.z = 180 - rotate.z;
 		transform.eulerAngles = rotate;
+
 	}
 
 	public void Update()
@@ -61,16 +62,36 @@ public class AISpawner : MonoBehaviour
 				switch(currentState)
 				{
 				case AreaState.One:
+					if(nextAISpawnTime - Time.time > TimerStates[0])
+					{
+						nextAISpawnTime = Time.time + TimerStates[0];
+					}
 					nextAISpawnTime += TimerStates[0];
+					if(nextAISpawnTime - Time.time > TimerStates[0])
+					{
+						nextAISpawnTime = Time.time + TimerStates[0];
+					}
 					break;
 				case AreaState.Two:
 					nextAISpawnTime += TimerStates[1];
+					if(nextAISpawnTime - Time.time > TimerStates[1])
+					{
+						nextAISpawnTime = Time.time + TimerStates[1];
+					}
 					break;
 				case AreaState.Three:
 					nextAISpawnTime += TimerStates[2];
+					if(nextAISpawnTime - Time.time > TimerStates[2])
+					{
+						nextAISpawnTime = Time.time + TimerStates[2];
+					}
 					break;
 				case AreaState.Four:
 					nextAISpawnTime += TimerStates[3];
+					if(nextAISpawnTime - Time.time > TimerStates[3])
+					{
+						nextAISpawnTime = Time.time + TimerStates[3];
+					}
 					break;
 				}
 			}
