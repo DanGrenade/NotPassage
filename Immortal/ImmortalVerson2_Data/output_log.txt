@@ -1,0 +1,23 @@
+Initialize engine version: 4.3.0f4 (e01000627d60)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 9.0c [aticfx32.dll 8.17.10.1191]
+    Renderer: AMD FirePro V5900 (FireGL V) Graphics Adapter
+    Vendor:   ATI
+    VRAM:     2035 MB (via DXGI)
+    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=1 INTZ=1 RAWZ=0 NULL=1 RESZ=1 SlowINTZ=1
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\jacob.berry\Desktop\GitHub\NotPassage\Immortal\ImmortalVerson2_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\jacob.berry\Desktop\GitHub\NotPassage\Immortal\ImmortalVerson2_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\jacob.berry\Desktop\GitHub\NotPassage\Immortal\ImmortalVerson2_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\jacob.berry\Desktop\GitHub\NotPassage\Immortal\ImmortalVerson2_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+- Completed reload, in  0.037 seconds
+desktop: 1280x1024 60Hz; virtual: 2560x1024 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+UnloadTime: 0.582805 ms
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 21 unused Assets to reduce memory usage. Loaded Objects now: 729.
+Total: 0.572825 ms (FindLiveObjects: 0.017963 ms CreateObjectMapping: 0.011120 ms MarkObjects: 0.090956 ms  DeleteObjects: 0.031649 ms)
+
