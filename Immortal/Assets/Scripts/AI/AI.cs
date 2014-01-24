@@ -18,9 +18,6 @@ public abstract class AI : MonoBehaviour
 	[System.NonSerialized]
 	public Vector2  FollowGoTo;
 
-	private float AIReactSpeed = 50f;
-	private float MaximumSpeed = 150f;
-
 	private float RunSpeed = 30f;
 	private float RunMaxSpeed = 60f;
 
@@ -74,18 +71,18 @@ public abstract class AI : MonoBehaviour
 		case AIState.Run:
 			if((Protagonist.transform.position - transform.position).sqrMagnitude < 2)
 			{
-				rigidbody2D.velocity = Vector2.ClampMagnitude(((rigidbody2D.velocity + ((Vector2)transform.position - (Vector2)Protagonist.transform.position)).normalized * Time.deltaTime * RunSpeed), RunMaxSpeed);
+				rigidbody2D.velocity = Vector2.ClampMagnitude(((rigidbody2D.velocity + ((Vector2)transform.position - (Vector2)Protagonist.transform.position)) * Time.deltaTime * RunSpeed), RunMaxSpeed);
 			}
 			break;
 		case AIState.MoveTowards:
 			if((Protagonist.transform.position - transform.position).sqrMagnitude < 2)
 			{
-				rigidbody2D.velocity = Vector2.ClampMagnitude(((rigidbody2D.velocity + (Vector2)Protagonist.transform.position - (Vector2)transform.position).normalized * Time.deltaTime * TowardsSpeed), TowardsMaxSpeed);
+				rigidbody2D.velocity = Vector2.ClampMagnitude(((rigidbody2D.velocity + (Vector2)Protagonist.transform.position - (Vector2)transform.position) * Time.deltaTime * TowardsSpeed), TowardsMaxSpeed);
 
 			}
 			break;
 		case AIState.Following:
-			rigidbody2D.velocity = Vector2.ClampMagnitude(((rigidbody2D.velocity + (Vector2)((Vector2)Protagonist.transform.TransformPoint(FollowGoTo) - (Vector2)transform.position)).normalized * Time.deltaTime * FollowSpeed), FollowMaxSpeed);
+			rigidbody2D.velocity = Vector2.ClampMagnitude(((rigidbody2D.velocity + (Vector2)((Vector2)Protagonist.transform.TransformPoint(FollowGoTo) - (Vector2)transform.position)) * Time.deltaTime * FollowSpeed), FollowMaxSpeed);
 
 			break;
 		}
