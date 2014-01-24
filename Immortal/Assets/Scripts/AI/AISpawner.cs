@@ -9,6 +9,8 @@ public class AISpawner : MonoBehaviour
 	}
 	public AreaState currentState = AreaState.Four;
 
+	public Vector2 PivotRotater;
+
 	#region Spawning AI
 	public float Radius;
 	public GameObject[] AIPrefabs;
@@ -37,6 +39,12 @@ public class AISpawner : MonoBehaviour
 		render = gameObject.GetComponent<SpriteRenderer> ();
 		birds = (GameObject)Resources.Load ("Birds") as GameObject;
 		nextAISpawnTime += TimerStates[0];
+
+		Vector3 rotate = transform.eulerAngles;
+		rotate.z = Vector2.Angle (Vector2.up, PivotRotater - (Vector2)transform.position);
+		if (PivotRotater.x < transform.position.x) rotate.z -= 180;
+		else rotate.z = 180 - rotate.z;
+		transform.eulerAngles = rotate;
 	}
 
 	public void Update()
