@@ -101,6 +101,7 @@ public class CameraScript : MonoBehaviour
 
 				if(Input.GetKeyDown (KeyCode.Escape))
 				{
+					endOfGameUI.SetActive(false);
 					Application.LoadLevel("GameScene");
 				}
 			}
